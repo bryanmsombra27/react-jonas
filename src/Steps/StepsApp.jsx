@@ -38,28 +38,43 @@ const StepsApp = () => {
             <div className={`${step >= 3 && "active"}`}>3</div>
           </div>
 
-          <p className="message">
-            step {step}: {messages[step - 1]}
-          </p>
-
+          <StepMessage step={step}>{messages[step - 1]}</StepMessage>
           <div className="buttons">
-            <button
-              style={{ color: "#fff", background: "#7950f2" }}
-              className="previous"
-              onClick={handleRest}
-            >
+            <Button clickHandler={handleRest} color="#fff" background="#7950f2">
+              <span>👈</span>
               Previous
-            </button>
-            <button
-              style={{ color: "#fff", background: "#7950f2" }}
-              className="next"
-              onClick={handleAdd}
-            >
+            </Button>
+            <Button clickHandler={handleAdd} color="#fff" background="#7950f2">
               Next
-            </button>
+              <span>👉</span>
+            </Button>
           </div>
         </div>
       )}
+    </>
+  );
+};
+
+const Button = ({ color, background, clickHandler, children }) => {
+  return (
+    <>
+      <button
+        style={{ color, background }}
+        // className="next"
+        onClick={clickHandler}
+      >
+        {children}
+      </button>
+    </>
+  );
+};
+const StepMessage = ({ step, children }) => {
+  return (
+    <>
+      <p className="message">
+        <h3>step {step}</h3>
+        {children}
+      </p>
     </>
   );
 };

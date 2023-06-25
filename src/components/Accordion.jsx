@@ -17,21 +17,27 @@ const faqs = [
 ];
 
 const Accordion = () => {
+  const [curOpen, setCurOpen] = useState(null);
   return (
     <>
       <div className="accordion">
         {faqs.map((item, index) => (
-          <AccordionItem item={item} index={index} />
+          <AccordionItem
+            item={item}
+            index={index}
+            curOpen={curOpen}
+            setIsOpen={setCurOpen}
+          />
         ))}
       </div>
     </>
   );
 };
-const AccordionItem = ({ item, index }) => {
-  const [isOpen, setIsOpen] = useState(false);
-
+const AccordionItem = ({ item, index, setIsOpen, curOpen }) => {
+  const isOpen = index == curOpen;
   const handleClick = () => {
-    setIsOpen((prevState) => !prevState);
+    // setIsOpen((prevState) => !prevState);
+    setIsOpen(index);
   };
   return (
     <>
