@@ -4,7 +4,11 @@ export const actions = {
   start: "start",
   newAnswer: "newAnswer",
   nextQuestion: "nextQuestion",
+  finished: "finished",
+  reset: "reset",
+  tick: "tick",
 };
+const SECS_PER_QUESTIONS = 30;
 
 const questionsReducer = (state = {}, action) => {
   switch (action.type) {
@@ -24,6 +28,7 @@ const questionsReducer = (state = {}, action) => {
       return {
         ...state,
         status: "active",
+        timeRemining: state.questions.length * SECS_PER_QUESTIONS,
       };
     case actions.newAnswer:
       const question = state.questions[state.index];
@@ -39,12 +44,34 @@ const questionsReducer = (state = {}, action) => {
       };
 
     case actions.nextQuestion:
-      const arrayLength = state.questions.length;
       return {
         ...state,
-        // index: state.index < arrayLength && state.index + 1,
         index: state.index + 1,
         answer: null,
+      };
+
+    case actions.finished:
+      return {
+        ...state,
+        status: "finished",
+        highscore:
+          state.points > state.highscore ? state.points : state.highscore,
+      };
+    case actions.reset:
+      return {
+        ...state,
+        status: "ready",
+        index: 0,
+        answer: null,
+        highscore: state.points,
+        points: 0,
+      };
+
+    case actions.tick:
+      return {
+        ...state,
+        timeRemining: state.timeRemining > 0 ? state.timeRemining - 1 : 0,
+        status: state.timeRemining === 0 ? "finished" : state.status,
       };
 
     default:

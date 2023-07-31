@@ -9,6 +9,9 @@ import StartScreen from "./components/StartScreen";
 import Question from "./components/Question";
 import NextButton from "./components/NextButton";
 import Progress from "./components/Progress";
+import FinishScreen from "./components/FinishScreen";
+import Footer from "./components/Footer";
+import Timer from "./components/Timer";
 
 const initialState = {
   questions: [],
@@ -16,18 +19,22 @@ const initialState = {
   index: 0,
   answer: null,
   points: 0,
+  highscore: 0,
+  timeRemining: null,
 };
 const statusApp = {
   loading: "loading",
   error: "error",
   ready: "ready",
   active: "active",
+  finished: "finished",
 };
 
 const ReactQuizApp = () => {
   const [questionState, dispatch] = useReducer(questionsReducer, initialState);
 
-  const { status, questions, index, answer, points } = questionState;
+  const { status, questions, index, answer, points, highscore, timeRemining } =
+    questionState;
   const questionsTotal = questions.length;
   const totalPoints = questions.reduce(
     (acc, question) => acc + question.points,
@@ -79,8 +86,25 @@ const ReactQuizApp = () => {
                 dispatch={dispatch}
                 answer={answer}
               />
-              <NextButton dispatch={dispatch} answer={answer} />
+              <Footer>
+                <Timer dispatch={dispatch} timeRemining={timeRemining} />
+                <NextButton
+                  dispatch={dispatch}
+                  answer={answer}
+                  index={index}
+                  questionsTotal={questionsTotal}
+                />
+              </Footer>
             </>
+          )}
+
+          {status == statusApp.finished && (
+            <FinishScreen
+              points={points}
+              totalPoints={totalPoints}
+              highscore={highscore}
+              dispatch={dispatch}
+            />
           )}
         </Main>
       </div>
