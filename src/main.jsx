@@ -1,6 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import ReactQuizApp from "./ReactQuiz/ReactQuizApp";
+// import ReactQuizApp from "./ReactQuiz/ReactQuizApp";
+import BankAccountApp from "./BankAccount/BankAccount";
 // import PizzaApp from "./PizzaMenu/PizzaApp.jsx";
 // import StepsApp from "./Steps/StepsApp";
 // import DateCounter from "./Steps/dateCounter.jsx";
@@ -30,7 +31,8 @@ ReactDOM.createRoot(document.getElementById("root")).render(
     </TextExpander> */}
 
     {/* <CurrencyConverterApp /> */}
-    <ReactQuizApp />
+    {/* <ReactQuizApp /> */}
+    <BankAccountApp/> 
     {/* <App /> */}
   </React.StrictMode>
 );
