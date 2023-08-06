@@ -1,0 +1,12 @@
+.nav ul {
+    list-style:none;
+    display: flex;
+    justify-content: space-between;
+}
+.nav :global(.active){
+    background-color: green;
+}
+/* DE ESTA FORMA SE CONVIERTE UNA CLASE DE MODULO A UNA CLASE GLOBAL PARA CSS */
+/* :global(.test){
+    background: olive;
+} */

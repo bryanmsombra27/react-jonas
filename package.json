@@ -8,11 +8,14 @@
     "build": "vite build",
     "lint": "eslint src --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
-    "server":"json-server --watch src/ReactQuiz/data/questions.json --port 8000"
+    "server": "json-server --watch src/ReactQuiz/data/questions.json --port 8000",
+    "cities": "json-server --watch src/WorldWise/data/cities.json --port 8000 --delay 500"
   },
   "dependencies": {
+    "@faker-js/faker": "^8.0.2",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.14.2"
   },
   "devDependencies": {
     "@types/react": "^18.0.37",
