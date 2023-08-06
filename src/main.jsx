@@ -3,7 +3,7 @@ import ReactDOM from "react-dom/client";
 // import ReactQuizApp from "./ReactQuiz/ReactQuizApp";
 // import BankAccountApp from "./BankAccount/BankAccount";
 import WorldWiseApp from "./WorldWise/WorldWiseApp";
-import App from "./AtomicBlog/App";
+// import App from "./AtomicBlog/App";
 // import PizzaApp from "./PizzaMenu/PizzaApp.jsx";
 // import StepsApp from "./Steps/StepsApp";
 // import DateCounter from "./Steps/dateCounter.jsx";
@@ -35,8 +35,9 @@ ReactDOM.createRoot(document.getElementById("root")).render(
     {/* <CurrencyConverterApp /> */}
     {/* <ReactQuizApp /> */}
     {/* <BankAccountApp/>  */}
-    {/* <WorldWiseApp /> */}
+    <WorldWiseApp />
     {/* <App /> */}
-    <App />
+
+    {/* <App /> */}
   </React.StrictMode>
 );
