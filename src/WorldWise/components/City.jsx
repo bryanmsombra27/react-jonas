@@ -1,7 +1,9 @@
-import { useParams, useSearchParams } from "react-router-dom";
+import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 import styles from "./City.module.css";
 import { useEffect, useState } from "react";
 import Spinner from "./Spinner";
+import { useCitiesContext } from "../context/CitiesContext";
+import Button from "./Button";
 
 const formatDate = (date) =>
   new Intl.DateTimeFormat("en", {
@@ -12,41 +14,16 @@ const formatDate = (date) =>
   }).format(new Date(date));
 
 function City() {
-  // TEMP DATA
-  const currentCity = {
-    cityName: "Lisbon",
-    emoji: "🇵🇹",
-    date: "2027-10-31T15:59:59.138Z",
-    notes: "My favorite city so far!",
-  };
   const { id } = useParams()
+  const { getOneCity, city, isLoading } = useCitiesContext()
   const [searchParams, setSearchParams] = useSearchParams()
   const lat = searchParams.get("lat")
   const lng = searchParams.get("lng")
+  const navigate = useNavigate();
 
-  const [city, setCity] = useState({});
-  const [isLoading, setIsLoading] = useState(false);
-  // const { cityName, emoji, date, notes } = currentCity;
-  // const { cityName, emoji, date, notes } = city;
 
   useEffect(() => {
-    const getOneCity = async () => {
-      setIsLoading(true)
-      try {
-        const res = await fetch(`http://localhost:8000/cities/${id}`);
-        const data = await res.json()
-
-        console.log(data)
-        setCity(data)
-
-      } catch (error) {
-        alert("could not find the city")
-      }
-      finally {
-        setIsLoading(false)
-      }
-    }
-    getOneCity()
+    getOneCity(id)
   }, [id]);
 
   if (isLoading) return <Spinner />
@@ -84,7 +61,12 @@ function City() {
       </div>
 
       <div>
-        {/* <ButtonBack /> */}
+        <Button type="back" buttonType="button" handleClick={(e) => {
+          navigate(-1)
+        }}>
+          &larr; Back
+
+        </Button>
       </div>
     </div>
   );

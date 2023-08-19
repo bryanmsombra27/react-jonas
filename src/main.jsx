@@ -3,6 +3,7 @@ import ReactDOM from "react-dom/client";
 // import ReactQuizApp from "./ReactQuiz/ReactQuizApp";
 // import BankAccountApp from "./BankAccount/BankAccount";
 import WorldWiseApp from "./WorldWise/WorldWiseApp";
+import { CitiesProvider } from "./WorldWise/context/CitiesContext";
 // import App from "./AtomicBlog/App";
 // import PizzaApp from "./PizzaMenu/PizzaApp.jsx";
 // import StepsApp from "./Steps/StepsApp";
@@ -36,6 +37,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
     {/* <ReactQuizApp /> */}
     {/* <BankAccountApp/>  */}
     <WorldWiseApp />
+
     {/* <App /> */}
 
     {/* <App /> */}

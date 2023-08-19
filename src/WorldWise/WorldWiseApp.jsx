@@ -11,54 +11,43 @@ import CityList from "./components/CityList";
 import { useEffect, useState } from "react";
 import CountryList from "./components/CountryList";
 import Form from "./components/Form";
+import { CitiesProvider } from "./context/CitiesContext";
+import { FakeAuthContextProvider } from "./context/FakeAuthContext";
+import ProtectedRoutes from "./pages/ProtectedRoutes";
+// import { PrivateRoute } from "./pages/ProtectedRoutes";
 
 const WorldWiseApp = () => {
-    const [cities, setCities] = useState([]);
-    const [isLoading, setIsLoading] = useState(false);
-
-    useEffect(() => {
-        const getCities = async () => {
-            try {
-                setIsLoading(true)
-                const res = await fetch("http://localhost:8000/cities")
-                const data = await res.json()
-
-                setCities(data)
-                console.log(data)
-            } catch (error) {
-                alert("error fetching data")
-            } finally {
-                setIsLoading(false)
-
-            }
-
-        }
-
-        getCities()
-
-    }, []);
-
 
 
     return (
+        <FakeAuthContextProvider>
+            <CitiesProvider>
+                <BrowserRouter>
+                    <Routes>
+                        <Route path="product" element={<Product />} />
+                        <Route path="pricing" element={<Pricing />} />
+                        <Route index element={<Homepage />} />
+                        <Route path="app" element={<>
+                            <ProtectedRoutes>
+                                <Layout />
 
-        <BrowserRouter>
-            <Routes>
-                <Route path="product" element={<Product />} />
-                <Route path="pricing" element={<Pricing />} />
-                <Route index element={<Homepage />} />
-                <Route path="app" element={<Layout />}>
-                    <Route index element={<Navigate replace to="cities" />} />
-                    <Route path="cities" element={<CityList cities={cities} isLoading={isLoading} />} />
-                    <Route path="countries" element={<CountryList cities={cities} isLoading={isLoading} />} />
-                    <Route path="form" element={<Form />} />
-                    <Route path="cities/:id" element={<City />} />
+                            </ProtectedRoutes>
+                        </>}>
+                            <Route index element={<Navigate replace to="cities" />} />
+                            <Route path="cities" element={<CityList />} />
+                            <Route path="countries" element={<CountryList />} />
+                            <Route path="form" element={<Form />} />
+                            <Route path="cities/:id" element={<City />} />
 
-                </Route>
-                <Route path="login" element={<Login />} />
-                <Route path="*" element={<PageNotFound />} />
-            </Routes>
-        </BrowserRouter>
+                        </Route>
+                        <Route path="login" element={<Login />} />
+                        <Route path="*" element={<PageNotFound />} />
+                    </Routes>
+                </BrowserRouter>
+            </CitiesProvider>
+        </FakeAuthContextProvider>
+
+
 
     )
 

@@ -1,11 +1,29 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./Login.module.css";
 import Nav from "../components/Nav";
+import { useFakeAuthContext } from "../context/FakeAuthContext";
+import { useNavigate } from "react-router-dom";
 
 export default function Login() {
   // PRE-FILL FOR DEV PURPOSES
   const [email, setEmail] = useState("jack@example.com");
   const [password, setPassword] = useState("qwerty");
+  const { login, logout, user } = useFakeAuthContext()
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    if (user?.isAuthenticated) {
+      navigate("/app")
+    }
+
+  }, [user]);
+
+
+  const appLogin = () => {
+    login(email, password)
+    //eliminar la pagina anterior del historial
+    navigate("/app", { replace: true })
+  }
 
   return (
     <main className={styles.login}>
@@ -32,7 +50,7 @@ export default function Login() {
         </div>
 
         <div>
-          <button>Login</button>
+          <button className={styles.button} onClick={appLogin}>Login</button>
         </div>
       </form>
     </main>
