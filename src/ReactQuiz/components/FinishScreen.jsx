@@ -1,6 +1,14 @@
+import { useReactQuizContext } from "../context/ReactQuizContext";
 import { actions } from "../reducer/questionsReducer";
 
-const FinishScreen = ({ points, totalPoints, highscore, dispatch }) => {
+const FinishScreen = () => {
+  const { questions, dispatch, points, highscore } =
+    useReactQuizContext();
+
+  const totalPoints = questions.reduce(
+    (acc, question) => acc + question.points,
+    0
+  );
   const percentage = (points * 100) / totalPoints;
   let emoji;
   if (percentage == 100) emoji = "🥇";

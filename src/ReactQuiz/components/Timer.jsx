@@ -1,7 +1,11 @@
 import { useEffect, useState } from "react";
 import { actions } from "../reducer/questionsReducer";
+import { useReactQuizContext } from "../context/ReactQuizContext";
 
-const Timer = ({ dispatch, timeRemining }) => {
+const Timer = () => {
+  const { dispatch, timeRemining } =
+    useReactQuizContext();
+
   const mins = Math.floor(timeRemining / 60);
   const seconds = timeRemining % 60;
   useEffect(() => {

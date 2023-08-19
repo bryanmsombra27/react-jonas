@@ -1,6 +1,11 @@
+import { useReactQuizContext } from "../context/ReactQuizContext";
 import { actions } from "../reducer/questionsReducer";
 
-const StartScreen = ({ questionsTotal, dispatch }) => {
+const StartScreen = () => {
+  const { questions, dispatch } =
+    useReactQuizContext();
+  const questionsTotal = questions.length;
+
   const handleClick = () => {
     dispatch({
       type: actions.start,

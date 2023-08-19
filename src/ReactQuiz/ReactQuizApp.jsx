@@ -12,16 +12,8 @@ import Progress from "./components/Progress";
 import FinishScreen from "./components/FinishScreen";
 import Footer from "./components/Footer";
 import Timer from "./components/Timer";
+import { useReactQuizContext } from "./context/ReactQuizContext";
 
-const initialState = {
-  questions: [],
-  status: "loading",
-  index: 0,
-  answer: null,
-  points: 0,
-  highscore: 0,
-  timeRemining: null,
-};
 const statusApp = {
   loading: "loading",
   error: "error",
@@ -30,17 +22,11 @@ const statusApp = {
   finished: "finished",
 };
 
+
 const ReactQuizApp = () => {
-  const [questionState, dispatch] = useReducer(questionsReducer, initialState);
 
-  const { status, questions, index, answer, points, highscore, timeRemining } =
-    questionState;
-  const questionsTotal = questions.length;
-  const totalPoints = questions.reduce(
-    (acc, question) => acc + question.points,
-    0
-  );
-
+  const { status, dispatch } =
+    useReactQuizContext();
   useEffect(() => {
     const fetchApi = async () => {
       try {
@@ -51,7 +37,6 @@ const ReactQuizApp = () => {
           payload: data,
         });
 
-        console.log(data);
       } catch (error) {
         dispatch({
           type: actions.dataFailed,
@@ -70,44 +55,25 @@ const ReactQuizApp = () => {
           {status == statusApp.loading && <Loader />}
           {status == statusApp.error && <Error />}
           {status == statusApp.ready && (
-            <StartScreen questionsTotal={questionsTotal} dispatch={dispatch} />
+            <StartScreen />
           )}
           {status == statusApp.active && (
             <>
-              <Progress
-                index={index}
-                numQuestions={questionsTotal}
-                points={points}
-                totalPoints={totalPoints}
-                answer={answer}
-              />
-              <Question
-                question={questions[index]}
-                dispatch={dispatch}
-                answer={answer}
-              />
+              <Progress />
+              <Question />
               <Footer>
-                <Timer dispatch={dispatch} timeRemining={timeRemining} />
-                <NextButton
-                  dispatch={dispatch}
-                  answer={answer}
-                  index={index}
-                  questionsTotal={questionsTotal}
-                />
+                <Timer />
+                <NextButton />
               </Footer>
             </>
           )}
 
           {status == statusApp.finished && (
-            <FinishScreen
-              points={points}
-              totalPoints={totalPoints}
-              highscore={highscore}
-              dispatch={dispatch}
-            />
+            <FinishScreen />
           )}
         </Main>
       </div>
+
     </>
   );
 };

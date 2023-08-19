@@ -1,6 +1,11 @@
+import { useReactQuizContext } from "../context/ReactQuizContext";
 import { actions } from "../reducer/questionsReducer";
 
-const NextButton = ({ dispatch, answer, index, questionsTotal }) => {
+const NextButton = () => {
+  const { dispatch, index, answer, questions } =
+    useReactQuizContext();
+  const questionsTotal = questions.length;
+
   const handleClick = () => {
     dispatch({
       type: actions.nextQuestion,

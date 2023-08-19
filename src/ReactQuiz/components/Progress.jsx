@@ -1,4 +1,15 @@
-const Progress = ({ index, numQuestions, points, totalPoints, answer }) => {
+import { useReactQuizContext } from "../context/ReactQuizContext";
+
+const Progress = () => {
+  const { questions, index, points, answer } =
+    useReactQuizContext();
+  const numQuestions = questions.length;
+
+  const totalPoints = questions.reduce(
+    (acc, question) => acc + question.points,
+    0
+  );
+
   return (
     <>
       <header className="progress">
