@@ -2,8 +2,9 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 // import ReactQuizApp from "./ReactQuiz/ReactQuizApp";
 // import BankAccountApp from "./BankAccount/BankAccount";
-import WorldWiseApp from "./WorldWise/WorldWiseApp";
+// import WorldWiseApp from "./WorldWise/WorldWiseApp";
 import { CitiesProvider } from "./WorldWise/context/CitiesContext";
+import App from "./ReduxIntroduction/App";
 // import App from "./AtomicBlog/App";
 // import PizzaApp from "./PizzaMenu/PizzaApp.jsx";
 // import StepsApp from "./Steps/StepsApp";
@@ -36,7 +37,8 @@ ReactDOM.createRoot(document.getElementById("root")).render(
     {/* <CurrencyConverterApp /> */}
     {/* <ReactQuizApp /> */}
     {/* <BankAccountApp/>  */}
-    <WorldWiseApp />
+    {/* <WorldWiseApp /> */}
+    <App />
 
     {/* <App /> */}
 
