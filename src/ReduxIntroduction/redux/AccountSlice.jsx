@@ -1,3 +1,4 @@
+import { createSlice } from "@reduxjs/toolkit"
 
 
 const initialStateAccount = {
@@ -7,74 +8,65 @@ const initialStateAccount = {
     isLoading: false
 }
 
+const accountSlice = createSlice({
+    name: "account",
+    initialState: initialStateAccount,
+    reducers: {
+        deposit(state, action) {
+            state.balance += action.payload,
+                state.isLoading = false
+        },
+        withdraw(state, action) {
+            state.balance -= action.payload
+        },
+        loan: {
+            prepare(amount, purpose) {
 
-const types = {
-    deposit: 'account/deposit',
-    withdraw: 'account/withdraw',
-    loan: 'account/requestLoan',
-    payLoan: 'account/payLoan',
-    loading: "account/loading",
-}
+                return {
+                    payload: {
+                        amount,
+                        purpose
+                    }
+                }
+            },
+            reducer(state, action) {
+                if (state.loan > 0) {
+                    return
+                }
+                state.loan = action.payload.amount,
+                    state.loanPurpose = action.payload.purpose,
+                    state.balance += action.payload.amount
+
+            },
+        },
+
+        payLoan(state, action) {
+            state.balance -= state.loan,
+                state.loanPurpose = "",
+                state.loan = 0
+        },
+        isLoading(state, action) {
+            state.isLoading = true
+        }
 
 
-
-const AccountReducer = (state = initialStateAccount, action) => {
-
-    switch (action.type) {
-
-        case types.deposit:
-            return {
-                ...state,
-                balance: state.balance + action.payload,
-                isLoading: false
-            }
-        case types.withdraw:
-            return {
-                ...state,
-                balance: state.balance - action.payload
-            }
-        case types.loan:
-            if (state.loan > 0) {
-                return state
-            }
-            return {
-                ...state,
-                loan: action.payload.amount,
-                loanPurpose: action.payload.purpose,
-                balance: state.balance + action.payload.amount
-            }
-        case types.payLoan:
-            return {
-                ...state,
-                loan: 0,
-                loanPurpose: "",
-                balance: state.balance - state.loan
-            }
-
-        case types.loading:
-            return {
-                ...state,
-                isLoading: true
-            }
-
-        default:
-            return state;
     }
+})
 
-}
+export const { loan, payLoan, withdraw, isLoading } = accountSlice.actions;
 
 //ACTIONS CREATORS FUNCTIONS
 export const deposit = (amount, currency) => {
     if (currency === "USD") {
         return {
-            type: types.deposit,
+            type: "account/deposit",
             payload: amount
         }
     }
 
     return async (dispatch, getState) => {
         dispatch({
-            type: types.loading
+            type: "account/isLoading"
         })
         //API CALL
         const res = await fetch(`https://api.frankfurter.app/latest?amount=${amount}&from=${currency}&to=USD`)
@@ -82,7 +74,7 @@ export const deposit = (amount, currency) => {
         const converted = data.rates.USD
 
         dispatch({
-            type: types.deposit,
+            type: "account/deposit",
             payload: converted
         })
 
@@ -90,26 +82,8 @@ export const deposit = (amount, currency) => {
 
 
 }
-export const withdraw = (amount) => {
-    return {
-        type: types.withdraw,
-        payload: amount
-    }
-}
-export const loan = (amount, purpose) => {
-    return {
-        type: types.loan,
-        payload: {
-            amount,
-            purpose
-        }
-    }
-}
-export const payLoan = () => {
-    return {
-        type: types.payLoan,
-    }
-}
 
 
-export default AccountReducer
+
+//export reducer
+export default accountSlice.reducer

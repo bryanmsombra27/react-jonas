@@ -1,3 +1,5 @@
+import { createSlice } from "@reduxjs/toolkit"
+
 const initialStateCustomer = {
     fullName: "",
     nationalID: "",
@@ -7,48 +9,34 @@ const types = {
     createCustomer: "customer/create",
     updateName: "customer/update"
 }
+const CustomerSlice = createSlice({
+    initialState: initialStateCustomer,
+    name: "customer",
+    reducers: {
 
-const CustomerReducer = (state = initialStateCustomer, action) => {
-
-    switch (action.type) {
-
-        case types.createCustomer:
-            return {
-                ...state,
-                fullName: action.payload.fullName,
-                nationalID: action.payload.nationalID,
-                createdAt: new Date().toISOString()
+        createCustomer: {
+            prepare(fullName, nationalID) {
+                return {
+                    payload: {
+                        fullName,
+                        nationalID,
+                        createdAt: new Date().toISOString()
+                    }
+                }
+            },
+            reducer(state, action) {
+                state.fullName = action.payload.fullName,
+                    state.nationalID = action.payload.nationalID,
+                    state.createdAt = action.payload.createdAt
             }
-        case types.updateName:
-            return {
-                ...state,
-                fullName: action.payload
-            }
-
-        default:
-            return state;
-    }
-
-}
-
-
-//ACTION CREATORS
-export const createCustomer = (fullName, nationalID) => {
-    return {
-        type: types.createCustomer,
-        payload: {
-            fullName,
-            nationalID
+        },
+        updateName(state, action) {
+            state.fullName = action.payload
         }
     }
-}
-export const updateName = (fullName) => {
-    return {
-        type: types.updateName,
-        payload: fullName,
+})
 
-    }
-}
+export const { updateName, createCustomer } = CustomerSlice.actions
 
-export default CustomerReducer;
+export default CustomerSlice.reducer
 
