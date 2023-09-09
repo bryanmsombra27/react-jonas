@@ -9,7 +9,7 @@ const UpdateOrder = ({ order }) => {
 
 
     return (
-        //no navega a otro lado, solo hace una revalidacion
+        //no navega a otro lado, solo hace una revalidacion 
         <fetcher.Form method="PATCH" className="text-right">
             <Button type="primary">Make Priority</Button>
 
