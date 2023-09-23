@@ -4,7 +4,8 @@ import ReactDOM from "react-dom/client";
 // import BankAccountApp from "./BankAccount/BankAccount";
 // import WorldWiseApp from "./WorldWise/WorldWiseApp";
 
-import App from "./FastReactPizzaCo/App";
+// import App from "./FastReactPizzaCo/App";
+import App from "./wideOasis/App";
 // import App from "./ReduxIntroduction/App";
 // import App from "./AtomicBlog/App";
 // import PizzaApp from "./PizzaMenu/PizzaApp.jsx";
@@ -39,8 +40,8 @@ ReactDOM.createRoot(document.getElementById("root")).render(
     {/* <ReactQuizApp /> */}
     {/* <BankAccountApp/>  */}
     {/* <WorldWiseApp /> */}
+    {/* <App /> */}
     <App />
-
     {/* <App /> */}
 
     {/* <App /> */}

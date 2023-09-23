@@ -14,16 +14,23 @@
   "dependencies": {
     "@faker-js/faker": "^8.0.2",
     "@reduxjs/toolkit": "^1.9.5",
+    "@supabase/supabase-js": "^2.33.1",
+    "@tanstack/react-query": "^4.35.0",
+    "@tanstack/react-query-devtools": "^4.35.0",
     "leaflet": "^1.9.4",
     "react": "^18.2.0",
     "react-datepicker": "^4.16.0",
     "react-dom": "^18.2.0",
+    "react-hook-form": "^7.46.1",
+    "react-hot-toast": "^2.4.1",
+    "react-icons": "^4.11.0",
     "react-leaflet": "^4.2.1",
     "react-redux": "^8.1.2",
     "react-router-dom": "^6.14.2",
     "redux": "^4.2.1",
     "redux-devtools-extension": "^2.13.9",
-    "redux-thunk": "^2.4.2"
+    "redux-thunk": "^2.4.2",
+    "styled-components": "^6.0.7"
   },
   "devDependencies": {
     "@types/react": "^18.0.37",
