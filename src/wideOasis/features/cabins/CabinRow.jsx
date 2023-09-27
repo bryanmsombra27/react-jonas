@@ -5,6 +5,9 @@ import { deleteCabins } from "../../services/apiCabins";
 import toast from "react-hot-toast";
 import { useState } from "react";
 import CreateCabinForm from "./CreateCabinForm";
+import useDeleteCabin from "./hooks/useDeleteCabin";
+import { HiPencil, HiTrash, HiOutlineChartSquareBar } from "react-icons/hi"
+import useCreateCabin from "./hooks/useCreateCabin";
 
 const TableRow = styled.div`
   display: grid;
@@ -47,30 +50,25 @@ const Discount = styled.div`
 
 
 const CabinRow = ({ cabin }) => {
-  // Access the client
-  const queryClient = useQueryClient()
   const [showForm, setShowForm] = useState(false);
-  const { image, name, maxCapacity, regularPrice, discount, id } = cabin
-  const { mutate, isLoading: isDeliting } = useMutation({
-    mutationFn: deleteCabins,
-    onSuccess: () => {
-      toast.success("deleting successfully")
-      // Invalidate and refetch
-      queryClient.invalidateQueries({ queryKey: ['cabins'] })
-    },
-    onError: (err) => {
-      // alert(err.message)
-      toast.error(err.message)
-
-    }
-
-  })
+  const { image, name, maxCapacity, regularPrice, discount, id, description } = cabin
+  const { mutate, isDeliting } = useDeleteCabin()
+  const { createCabin, isCreating } = useCreateCabin()
 
   const handleDelete = (id) => {
     mutate(id)
-
   }
 
+  const handleDuplicate = () => {
+    createCabin({
+      name: `copy of ${name}`,
+      maxCapacity,
+      regularPrice,
+      discount,
+      image,
+      description,
+    })
+  }
 
   return (
     <>
@@ -79,10 +77,24 @@ const CabinRow = ({ cabin }) => {
         <Cabin >{name}</Cabin>
         <div>Fits up to {maxCapacity}</div>
         <Price>{formatCurrency(regularPrice)}</Price>
-        <Discount>{formatCurrency(discount)} </Discount>
+        {discount ? (
+          <Discount>{formatCurrency(discount)} </Discount>
 
-        <button onClick={() => setShowForm(prevState => !prevState)}  >Edit</button>
-        <button onClick={() => handleDelete(id)} disabled={isDeliting} >Delete</button>
+        ) : <span>&mdash;</span>}
+
+        <div>
+          <button onClick={handleDuplicate} disabled={isCreating}>
+            {/* <HiSquare2Stack /> */}
+            <HiOutlineChartSquareBar />
+          </button>
+          <button onClick={() => setShowForm(prevState => !prevState)}  >
+            <HiPencil />
+          </button>
+          <button onClick={() => handleDelete(id)} disabled={isDeliting} >
+            <HiTrash />
+          </button>
+        </div>
+
       </TableRow>
 
       {showForm && (
