@@ -15,7 +15,7 @@ import useEditCabin from "./hooks/useEditCabin";
 
 
 
-function CreateCabinForm({ cabin = {} }) {
+function CreateCabinForm({ cabin = {}, onCloseModal }) {
 
   const { id: editId, ...editValues } = cabin
   const isEdit = Boolean(editId)
@@ -45,7 +45,7 @@ function CreateCabinForm({ cabin = {} }) {
   }
 
   return (
-    <Form onSubmit={handleSubmit(submit, errorHandling)}>
+    <Form onSubmit={handleSubmit(submit, errorHandling)} type={onCloseModal ? "modal" : "regular"}>
       <FormRow label="Cabin name" error={errors?.name?.message} >
         <Input type="text" id="name" disabled={isWorking}  {...register("name", {
           required: "this field is required"
@@ -103,7 +103,7 @@ function CreateCabinForm({ cabin = {} }) {
 
       <FormRow>
         {/* type is an HTML attribute! */}
-        <Button variation="secondary" type="reset" disabled={isWorking} >
+        <Button variation="secondary" type="reset" disabled={isWorking} onClick={() => onCloseModal?.()}   >
           Cancel
         </Button>
         <Button disabled={isWorking}>{isEdit ? "Edit" : "Create new"} cabin</Button>

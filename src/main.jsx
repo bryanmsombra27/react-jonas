@@ -6,7 +6,7 @@ import CompoundComponent from "./ReactPatterns/CompoundComponent";
 // import WorldWiseApp from "./WorldWise/WorldWiseApp";
 
 // import App from "./FastReactPizzaCo/App";
-// import App from "./wideOasis/App";
+import App from "./wideOasis/App";
 // import App from "./ReactPatterns/RenderProps";
 // import App from "./ReduxIntroduction/App";
 // import App from "./AtomicBlog/App";
@@ -46,7 +46,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
     {/* <App /> */}
     {/* <App /> */}
     {/* <App /> */}
-    {/* <App /> */}
+    <App />
 
     <CompoundComponent />
   </React.StrictMode>
