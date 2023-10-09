@@ -39,6 +39,7 @@ function CreateCabinForm({ cabin = {}, onCloseModal }) {
 
     }
     reset()
+    onCloseModal?.()
   }
   const errorHandling = async (dataForm) => {
 
