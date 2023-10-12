@@ -55,6 +55,9 @@ box-shadow:var(--shadow-sm) ;
 ${(props) => variations[props.variation]}
 ${(props) => sizes[props.size]}
 
+ button:disabled{
+    accent-color: var(--color-brand-600);
+  }
 `;
 
 Button.defaultProps =

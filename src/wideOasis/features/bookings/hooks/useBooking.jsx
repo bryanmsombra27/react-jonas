@@ -12,7 +12,7 @@ const useBooking = () => {
 
 
     // Queries  queryKey es similar a un arreglo de dependencias que refrecara la data dependiendo el cambio de las variables en el arreglo
-    const { isLoading, data: booking, error } = useQuery({ queryKey: ['booking'], queryFn: () => getBooking(id), retry: false })
+    const { isLoading, data: booking, error } = useQuery({ queryKey: ['booking', id], queryFn: () => getBooking(id), retry: false })
 
 
 
