@@ -15,6 +15,7 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { Toaster } from "react-hot-toast";
 import Booking from "./pages/Booking";
 import Checkin from "./pages/Checkin";
+import ProtectedRoutes from "./ui/ProtectedRoutes";
 
 const queryClient = new QueryClient({
     defaultOptions: {
@@ -36,7 +37,12 @@ const App = () => {
 
                 <Router>
                     <Routes>
-                        <Route element={<AppLayout />}  >
+                        <Route element={
+                            <ProtectedRoutes>
+                                <AppLayout />
+
+                            </ProtectedRoutes>
+                        }  >
                             <Route path="dashboard" element={<Dashboard />} ></Route>
                             <Route index path="" element={<Dashboard />} exact ></Route>
                             <Route path="bookings" element={<Bookings />}  ></Route>
