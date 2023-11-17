@@ -7,6 +7,7 @@ import CompoundComponent from "./ReactPatterns/CompoundComponent";
 
 // import App from "./FastReactPizzaCo/App";
 import App from "./wideOasis/App";
+// import App from "./ShadowBank/App";
 // import App from "./ReactPatterns/RenderProps";
 // import App from "./ReduxIntroduction/App";
 // import App from "./AtomicBlog/App";
@@ -42,6 +43,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
     {/* <ReactQuizApp /> */}
     {/* <BankAccountApp/>  */}
     {/* <WorldWiseApp /> */}
+    {/* <App /> */}
     {/* <App /> */}
     {/* <App /> */}
     {/* <App /> */}
