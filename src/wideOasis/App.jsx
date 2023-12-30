@@ -16,6 +16,7 @@ import { Toaster } from "react-hot-toast";
 import Booking from "./pages/Booking";
 import Checkin from "./pages/Checkin";
 import ProtectedRoutes from "./ui/ProtectedRoutes";
+import { DarkmodeContextProvider } from "./context/DarkmodeContext";
 
 const queryClient = new QueryClient({
     defaultOptions: {
@@ -31,48 +32,51 @@ const App = () => {
 
     return (
         <>
-            <QueryClientProvider client={queryClient}>
-                <ReactQueryDevtools initialIsOpen={false} />
-                <GlobalStyles />
+            <DarkmodeContextProvider>
 
-                <Router>
-                    <Routes>
-                        <Route element={
-                            <ProtectedRoutes>
-                                <AppLayout />
+                <QueryClientProvider client={queryClient}>
+                    <ReactQueryDevtools initialIsOpen={false} />
+                    <GlobalStyles />
 
-                            </ProtectedRoutes>
-                        }  >
-                            <Route path="dashboard" element={<Dashboard />} ></Route>
-                            <Route index path="" element={<Dashboard />} exact ></Route>
-                            <Route path="bookings" element={<Bookings />}  ></Route>
-                            <Route path="bookings/:id" element={<Booking />}  ></Route>
-                            <Route path="checkin/:id" element={<Checkin />}  ></Route>
-                            <Route path="cabins" element={<Cabins />}  ></Route>
-                            <Route path="users" element={<NewUsers />}  ></Route>
-                            <Route path="settings" element={<Settings />}  ></Route>
-                            <Route path="account" element={<Account />}  ></Route>
+                    <Router>
+                        <Routes>
+                            <Route element={
+                                <ProtectedRoutes>
+                                    <AppLayout />
 
-                        </Route>
-                        <Route path="login" element={<Login />}  ></Route>
-                        <Route path="*" element={<PageNotFound />}  ></Route>
-                    </Routes>
-                </Router>
+                                </ProtectedRoutes>
+                            }  >
+                                <Route path="dashboard" element={<Dashboard />} ></Route>
+                                <Route index path="" element={<Dashboard />} exact ></Route>
+                                <Route path="bookings" element={<Bookings />}  ></Route>
+                                <Route path="bookings/:id" element={<Booking />}  ></Route>
+                                <Route path="checkin/:id" element={<Checkin />}  ></Route>
+                                <Route path="cabins" element={<Cabins />}  ></Route>
+                                <Route path="users" element={<NewUsers />}  ></Route>
+                                <Route path="settings" element={<Settings />}  ></Route>
+                                <Route path="account" element={<Account />}  ></Route>
+
+                            </Route>
+                            <Route path="login" element={<Login />}  ></Route>
+                            <Route path="*" element={<PageNotFound />}  ></Route>
+                        </Routes>
+                    </Router>
 
 
-                <Toaster position="top-center" gutter={12} containerStyle={{ margin: "8px" }} toastOptions={{
-                    success: { duration: 3000 },
-                    error: { duration: 5000 },
-                    style: {
-                        fontSize: "16px",
-                        maxWidth: "500px",
-                        padding: "16px 24px",
-                        backgroundColor: "var(--color-grey-0)",
-                        color: "var(--color-grey-700)",
-                    }
-                }} />
+                    <Toaster position="top-center" gutter={12} containerStyle={{ margin: "8px" }} toastOptions={{
+                        success: { duration: 3000 },
+                        error: { duration: 5000 },
+                        style: {
+                            fontSize: "16px",
+                            maxWidth: "500px",
+                            padding: "16px 24px",
+                            backgroundColor: "var(--color-grey-0)",
+                            color: "var(--color-grey-700)",
+                        }
+                    }} />
 
-            </QueryClientProvider>
+                </QueryClientProvider>
+            </DarkmodeContextProvider>
 
         </>
 

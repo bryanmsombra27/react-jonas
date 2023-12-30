@@ -10,6 +10,7 @@ const useLogin = () => {
         mutationFn: ({ email, password }) => loginApi({ email, password }),
         onSuccess: (user) => {
             //setear data en cache  
+            // queryClient.setQueryData(["user"], user.user)
             queryClient.setQueryData(["user"], user)
             navigate("/dashboard")
         },
