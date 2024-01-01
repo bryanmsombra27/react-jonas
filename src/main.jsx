@@ -7,6 +7,8 @@ import CompoundComponent from "./ReactPatterns/CompoundComponent";
 
 // import App from "./FastReactPizzaCo/App";
 import App from "./wideOasis/App";
+import { ErrorBoundary } from "react-error-boundary";
+import ErrorFallback from "./wideOasis/ui/ErrorFallback";
 // import App from "./ShadowBank/App";
 // import App from "./ReactPatterns/RenderProps";
 // import App from "./ReduxIntroduction/App";
@@ -25,31 +27,35 @@ import App from "./wideOasis/App";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    {/* <PizzaApp /> */}
-    {/* <StepsApp /> */}
-    {/* <DateCounter /> */}
-    {/* <TravelListApp /> */}
-    {/* {<Accordion />} */}
-    {/* <TipCalculator /> */}
-    {/* <EatNSplintApp /> */}
-    {/* <PopcornApp /> */}
-    {/* <TextExpander>
+    <ErrorBoundary FallbackComponent={ErrorFallback} onReset={() => window.location.replace("/")}>
+
+      {/* <PizzaApp /> */}
+      {/* <StepsApp /> */}
+      {/* <DateCounter /> */}
+      {/* <TravelListApp /> */}
+      {/* {<Accordion />} */}
+      {/* <TipCalculator /> */}
+      {/* <EatNSplintApp /> */}
+      {/* <PopcornApp /> */}
+      {/* <TextExpander>
       Lorem ipsum dolor sit amet consectetur, adipisicing elit. Molestiae odio
       exercitationem ea! Commodi, saepe similique fuga consequatur sint officia,
       hic voluptatum laborum harum sunt earum tempora totam, aperiam id ipsam?
     </TextExpander> */}
 
-    {/* <CurrencyConverterApp /> */}
-    {/* <ReactQuizApp /> */}
-    {/* <BankAccountApp/>  */}
-    {/* <WorldWiseApp /> */}
-    {/* <App /> */}
-    {/* <App /> */}
-    {/* <App /> */}
-    {/* <App /> */}
-    {/* <App /> */}
-    <App />
+      {/* <CurrencyConverterApp /> */}
+      {/* <ReactQuizApp /> */}
+      {/* <BankAccountApp/>  */}
+      {/* <WorldWiseApp /> */}
+      {/* <App /> */}
+      {/* <App /> */}
+      {/* <App /> */}
+      {/* <App /> */}
+      {/* <App /> */}
+      <App />
 
-    {/* <CompoundComponent /> */}
+      {/* <CompoundComponent /> */}
+    </ErrorBoundary>
+
   </React.StrictMode>
 );
